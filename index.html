@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garabatos · Papelería creativa</title>
+<meta name="description" content="Pines magnéticos para la nevera hechos con amor. Pide por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     COLORES — cámbialos aquí si quieres otro estilo
+     ========================================================= */
+  :root{
+    --papel:#fffaf0;
+    --tinta:#2b2340;
+    --suave:#6b6380;
+    --rosa:#ff7eb6;
+    --amarillo:#ffd23f;
+    --menta:#3ddc97;
+    --azul:#5aa9e6;
+    --naranja:#ff9f43;
+    --morado:#a17cff;
+    --borde:#2b2340;
+    --whatsapp:#25d366;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Nunito',system-ui,sans-serif;
+    color:var(--tinta);
+    background:var(--papel);
+    background-image:radial-gradient(#e9e0cf 1px,transparent 1px);
+    background-size:22px 22px;
+    line-height:1.5;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+
+  /* ---------- Encabezado ---------- */
+  header{padding:28px 0 8px;text-align:center}
+  .logo{
+    font-family:'Gochi Hand',cursive;
+    font-size:clamp(3rem,10vw,5.5rem);
+    line-height:1;
+    letter-spacing:2px;
+  }
+  .logo span{display:inline-block}
+  .logo span:nth-child(5n+1){color:var(--rosa);transform:rotate(-6deg)}
+  .logo span:nth-child(5n+2){color:var(--azul);transform:rotate(4deg)}
+  .logo span:nth-child(5n+3){color:var(--naranja);transform:rotate(-3deg)}
+  .logo span:nth-child(5n+4){color:var(--menta);transform:rotate(6deg)}
+  .logo span:nth-child(5n+5){color:var(--morado);transform:rotate(-4deg)}
+  .tag{font-family:'Gochi Hand',cursive;font-size:1.5rem;color:var(--suave);margin-top:6px}
+  .garabato{display:block;margin:10px auto 0;width:180px;height:24px}
+
+  /* ---------- Banner ---------- */
+  .hero{
+    margin:22px 0;
+    background:var(--amarillo);
+    border:3px solid var(--borde);
+    border-radius:22px;
+    box-shadow:6px 6px 0 var(--borde);
+    padding:22px;
+    display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;
+    text-align:center;
+  }
+  .hero h2{font-family:'Gochi Hand',cursive;font-size:2rem;font-weight:400;line-height:1.1}
+  .hero p{max-width:520px}
+
+  /* ---------- Filtros ---------- */
+  .filtros{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0 24px}
+  .chip{
+    font:inherit;font-weight:800;cursor:pointer;
+    background:#fff;color:var(--tinta);
+    border:2.5px solid var(--borde);border-radius:999px;
+    padding:6px 16px;box-shadow:3px 3px 0 var(--borde);
+    transition:transform .1s;
+  }
+  .chip:hover{transform:translate(-1px,-1px)}
+  .chip.activo{background:var(--rosa);color:#fff}
+
+  /* ---------- Productos ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;padding-bottom:40px}
+  .card{
+    background:#fff;border:3px solid var(--borde);border-radius:20px;
+    box-shadow:5px 5px 0 var(--borde);
+    padding:18px;display:flex;flex-direction:column;align-items:center;text-align:center;
+    transition:transform .15s;
+  }
+  .card:hover{transform:rotate(-1deg) translateY(-3px)}
+  .pin{
+    width:130px;height:130px;border-radius:50%;
+    border:3px solid var(--borde);
+    display:grid;place-items:center;
+    font-size:4rem;
+    box-shadow:inset -8px -8px 0 rgba(0,0,0,.08), 3px 3px 0 var(--borde);
+    margin-bottom:14px;overflow:hidden;
+  }
+  .pin img{width:100%;height:100%;object-fit:cover}
+  .card h3{font-size:1.1rem;font-weight:800;line-height:1.2}
+  .card .desc{font-size:.9rem;color:var(--suave);margin:6px 0 10px;flex:1}
+  .precio{font-family:'Gochi Hand',cursive;font-size:1.7rem}
+  .etiqueta{
+    font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    background:var(--menta);border:2px solid var(--borde);border-radius:999px;padding:1px 10px;margin-bottom:8px
+  }
+  .btn{
+    font:inherit;font-weight:800;cursor:pointer;width:100%;
+    margin-top:10px;padding:9px 12px;
+    border:2.5px solid var(--borde);border-radius:12px;
+    background:var(--azul);color:#fff;box-shadow:3px 3px 0 var(--borde);
+  }
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--borde)}
+
+  /* ---------- Bolsa flotante ---------- */
+  .bolsa-btn{
+    position:fixed;right:16px;bottom:16px;z-index:20;
+    font:inherit;font-weight:800;cursor:pointer;
+    background:var(--rosa);color:#fff;
+    border:3px solid var(--borde);border-radius:999px;
+    padding:12px 18px;box-shadow:4px 4px 0 var(--borde);
+    display:flex;align-items:center;gap:8px;
+  }
+  .contador{background:#fff;color:var(--tinta);border-radius:999px;min-width:26px;padding:0 6px;text-align:center}
+  .panel-fondo{position:fixed;inset:0;background:rgba(43,35,64,.45);z-index:30;display:none}
+  .panel{
+    position:fixed;top:0;right:0;height:100%;width:min(380px,100%);
+    background:var(--papel);border-left:3px solid var(--borde);z-index:40;
+    transform:translateX(100%);transition:transform .25s;
+    display:flex;flex-direction:column;
+  }
+  .abierto .panel{transform:none}
+  .abierto .panel-fondo{display:block}
+  .panel header{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:2px dashed var(--borde);text-align:left}
+  .panel h2{font-family:'Gochi Hand',cursive;font-weight:400;font-size:2rem}
+  .cerrar{font-size:1.6rem;background:none;border:none;cursor:pointer;color:var(--tinta)}
+  .items{flex:1;overflow:auto;padding:12px 16px}
+  .item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed #cfc6b5}
+  .item .mini{width:44px;height:44px;border-radius:50%;border:2px solid var(--borde);display:grid;place-items:center;font-size:1.4rem;flex:none;overflow:hidden}
+  .item .mini img{width:100%;height:100%;object-fit:cover}
+  .item .info{flex:1;font-size:.9rem}
+  .cant{display:flex;align-items:center;gap:6px}
+  .cant button{width:28px;height:28px;border-radius:50%;border:2px solid var(--borde);background:#fff;font-weight:800;cursor:pointer}
+  .vacio{text-align:center;color:var(--suave);margin-top:40px}
+  .pie-panel{padding:16px;border-top:2px dashed var(--borde)}
+  .total{display:flex;justify-content:space-between;font-weight:800;font-size:1.1rem;margin-bottom:10px}
+  .btn-wa{background:var(--whatsapp)}
+
+  footer{text-align:center;padding:30px 16px 90px;color:var(--suave);font-size:.9rem}
+  footer a{color:var(--tinta);font-weight:800}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1 class="logo" id="logo">Garabatos</h1>
+    <p class="tag">papelería creativa ✏️</p>
+    <svg class="garabato" viewBox="0 0 180 24" fill="none" stroke="#2b2340" stroke-width="3" stroke-linecap="round">
+      <path d="M4 14 C 20 2, 30 22, 46 12 S 74 2, 90 12 S 118 22, 134 12 S 162 2, 176 12"/>
+    </svg>
+  </header>
+
+  <section class="hero">
+    <div style="font-size:3rem">🧲</div>
+    <div>
+      <h2>Pines magnéticos para tu nevera</h2>
+      <p>Diseños únicos, coloridos y hechos a mano. Elige tus favoritos, agrégalos a la bolsa y envíanos tu pedido por WhatsApp.</p>
+    </div>
+  </section>
+
+  <nav class="filtros" id="filtros"></nav>
+  <main class="grid" id="grid"></main>
+</div>
+
+<footer>
+  Hecho con 💛 por Garabatos ·
+  <a id="link-wa" href="#" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+</footer>
+
+<!-- Bolsa de pedido -->
+<button class="bolsa-btn" id="abrir-bolsa" aria-label="Ver mi pedido">🛍️ Mi pedido <span class="contador" id="contador">0</span></button>
+<div id="carrito">
+  <div class="panel-fondo" id="fondo"></div>
+  <aside class="panel" aria-label="Mi pedido">
+    <header>
+      <h2>Mi pedido</h2>
+      <button class="cerrar" id="cerrar" aria-label="Cerrar">✕</button>
+    </header>
+    <div class="items" id="items"></div>
+    <div class="pie-panel">
+      <div class="total"><span>Total</span><span id="total">$0</span></div>
+      <button class="btn btn-wa" id="enviar">Enviar pedido por WhatsApp 💬</button>
+    </div>
+  </aside>
+</div>
+
+<script>
+/* =========================================================
+   1) TU NÚMERO DE WHATSAPP
+   Código de país + número, sin espacios ni "+".
+   Ejemplo Colombia: 573001234567
+   ========================================================= */
+const WHATSAPP = "573000000000";
+
+/* =========================================================
+   2) TUS PRODUCTOS
+   Para cada pin cambia: nombre, precio, categoría y descripción.
+   Cuando tengas fotos: súbelas a la carpeta "fotos" en GitHub
+   y escribe la ruta en "foto", por ejemplo: "fotos/gatito.jpg".
+   Mientras "foto" esté vacío se muestra el emoji.
+   ========================================================= */
+const PRODUCTOS = [
+  { nombre:"Gatito dormilón",   precio:6000,  categoria:"Animalitos",   emoji:"🐱", color:"#ffd23f", foto:"", desc:"Para los que aman las siestas." },
+  { nombre:"Perrito feliz",     precio:6000,  categoria:"Animalitos",   emoji:"🐶", color:"#5aa9e6", foto:"", desc:"Mueve la colita cada vez que abres la nevera." },
+  { nombre:"Ranita",            precio:6000,  categoria:"Animalitos",   emoji:"🐸", color:"#3ddc97", foto:"", desc:"Verde, pequeña y muy simpática." },
+  { nombre:"Aguacate kawaii",   precio:6000,  categoria:"Comiditas",    emoji:"🥑", color:"#a17cff", foto:"", desc:"El favorito de la cocina." },
+  { nombre:"Fresita",           precio:6000,  categoria:"Comiditas",    emoji:"🍓", color:"#ff7eb6", foto:"", desc:"Dulce y coqueta." },
+  { nombre:"Cafecito",          precio:6000,  categoria:"Comiditas",    emoji:"☕", color:"#ff9f43", foto:"", desc:"Para empezar el día con energía." },
+  { nombre:"“Hoy sí me alimento bien”", precio:7000, categoria:"Frases", emoji:"💬", color:"#ffd23f", foto:"", desc:"Un recordatorio con humor." },
+  { nombre:"“Lista del mercado”", precio:7000, categoria:"Frases",      emoji:"📝", color:"#3ddc97", foto:"", desc:"Para sostener tus notitas." },
+  { nombre:"Kit x3 a tu elección", precio:15000, categoria:"Kits",      emoji:"🎁", color:"#ff7eb6", foto:"", desc:"Escoge 3 diseños y ahorra. Cuéntanos cuáles en el chat." },
+  { nombre:"Pin personalizado", precio:9000,  categoria:"Personalizados", emoji:"✨", color:"#5aa9e6", foto:"", desc:"Tu nombre, tu mascota o tu frase favorita." }
+];
+
+/* ====== De aquí hacia abajo no necesitas cambiar nada ====== */
+const $ = id => document.getElementById(id);
+const pesos = n => "$" + n.toLocaleString("es-CO");
+const linkWA = txt => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
+const imagen = p => p.foto ? `<img src="${p.foto}" alt="${p.nombre}">` : p.emoji;
+
+// Logo con letras de colores
+$("logo").innerHTML = [..."Garabatos"].map(l => `<span>${l}</span>`).join("");
+$("link-wa").href = linkWA("¡Hola Garabatos! Quiero información 😊");
+
+// Filtros
+const categorias = ["Todos", ...new Set(PRODUCTOS.map(p => p.categoria))];
+let filtro = "Todos";
+function pintarFiltros(){
+  $("filtros").innerHTML = categorias.map(c =>
+    `<button class="chip ${c===filtro?'activo':''}" data-c="${c}">${c}</button>`).join("");
+}
+$("filtros").addEventListener("click", e => {
+  if(!e.target.dataset.c) return;
+  filtro = e.target.dataset.c; pintarFiltros(); pintarProductos();
+});
+
+// Productos
+function pintarProductos(){
+  $("grid").innerHTML = PRODUCTOS.map((p,i) => ({p,i}))
+    .filter(({p}) => filtro==="Todos" || p.categoria===filtro)
+    .map(({p,i}) => `
+      <article class="card">
+        <span class="etiqueta">${p.categoria}</span>
+        <div class="pin" style="background:${p.color}">${imagen(p)}</div>
+        <h3>${p.nombre}</h3>
+        <p class="desc">${p.desc}</p>
+        <div class="precio">${pesos(p.precio)}</div>
+        <button class="btn" data-i="${i}">Agregar al pedido</button>
+      </article>`).join("");
+}
+$("grid").addEventListener("click", e => {
+  const i = e.target.dataset.i; if(i===undefined) return;
+  bolsa[i] = (bolsa[i]||0) + 1; guardar(); pintarBolsa();
+  e.target.textContent = "¡Agregado! ✓";
+  setTimeout(() => e.target.textContent = "Agregar al pedido", 900);
+});
+
+// Bolsa (se guarda en el navegador del cliente)
+let bolsa = {};
+try { bolsa = JSON.parse(localStorage.getItem("garabatos-bolsa")) || {}; } catch(e){}
+function guardar(){ try { localStorage.setItem("garabatos-bolsa", JSON.stringify(bolsa)); } catch(e){} }
+
+function pintarBolsa(){
+  const lista = Object.entries(bolsa).filter(([i,c]) => c>0 && PRODUCTOS[i]);
+  $("contador").textContent = lista.reduce((s,[,c]) => s+c, 0);
+  $("total").textContent = pesos(lista.reduce((s,[i,c]) => s + PRODUCTOS[i].precio*c, 0));
+  $("items").innerHTML = lista.length ? lista.map(([i,c]) => {
+    const p = PRODUCTOS[i];
+    return `<div class="item">
+      <div class="mini" style="background:${p.color}">${imagen(p)}</div>
+      <div class="info"><strong>${p.nombre}</strong><br>${pesos(p.precio*c)}</div>
+      <div class="cant">
+        <button data-m="${i}" aria-label="Quitar uno">−</button><span>${c}</span>
+        <button data-p="${i}" aria-label="Agregar uno">+</button>
+      </div></div>`;
+  }).join("") : `<p class="vacio">Tu pedido está vacío.<br>¡Escoge tus pines favoritos! 🧲</p>`;
+}
+$("items").addEventListener("click", e => {
+  const {m,p} = e.target.dataset;
+  if(m!==undefined) bolsa[m]--;
+  if(p!==undefined) bolsa[p]++;
+  guardar(); pintarBolsa();
+});
+
+$("enviar").addEventListener("click", () => {
+  const lista = Object.entries(bolsa).filter(([i,c]) => c>0 && PRODUCTOS[i]);
+  if(!lista.length){ alert("Agrega al menos un pin a tu pedido 😊"); return; }
+  let total = 0;
+  const lineas = lista.map(([i,c]) => {
+    const p = PRODUCTOS[i]; total += p.precio*c;
+    return `• ${c} x ${p.nombre} — ${pesos(p.precio*c)}`;
+  });
+  const msg = `¡Hola Garabatos! 🧲 Quiero hacer este pedido:\n\n${lineas.join("\n")}\n\nTotal: ${pesos(total)}\n\nMi nombre:\nCiudad / dirección:`;
+  window.open(linkWA(msg), "_blank");
+});
+
+const abrir = v => document.getElementById("carrito").classList.toggle("abierto", v);
+$("abrir-bolsa").onclick = () => abrir(true);
+$("cerrar").onclick = () => abrir(false);
+$("fondo").onclick = () => abrir(false);
+
+pintarFiltros(); pintarProductos(); pintarBolsa();
+</script>
+</body>
+</html>
