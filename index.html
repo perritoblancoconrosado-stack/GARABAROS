@@ -211,12 +211,13 @@ const WHATSAPP = "573000000000";
    Mientras "foto" esté vacío se muestra el emoji.
    ========================================================= */
 const PRODUCTOS = [
-  { nombre:"Cheescake",   precio:6000,  categoria:"MASCOTAS",   emoji:"", color:"#ffd23f", foto:"", desc:"Envianos la foto de tu mascota y la editamos." },
-  { nombre:"Pimienta",     precio:6000,  categoria:"MASCOTAS",   emoji:"", color:"#5aa9e6", foto:"", desc:"Envianos la foto de tu mascota y la editamos." },
-  { nombre:"Ranita",            precio:6000,  categoria:"MASCOTAS",   emoji:"", color:"#3ddc97", foto:"", desc:"Verde, pequeña y muy simpática." },
-  { nombre:"Marco para fotos", precio:10000, categoria:"FOTOS",      emoji:"", color:"#3ddc97", foto:"", desc:"Decora tus mejores momentos." },
-  { nombre:"Marco y fotos", precio:15000, categoria:"FOTOS",      emoji:"", color:"#ff7eb6", foto:"", desc:"Hacemos que se vea como un photobooth." },
-   { nombre:"Pin personalizado", precio:10000, desde:10000, categoria:"PERZONALIZADOS", emoji:"", color:"#5aa9e6", foto:"", desc:"¿Buscas algo más? ¡Envíalo! Cotizamos por tamaño." }
+  { nombre:"Cheesecake",        precio:6000,  categoria:"MASCOTAS",       emoji:"", color:"#ffd23f", foto:"", desc:"Envíanos la foto de tu mascota y la editamos." },
+  { nombre:"Pimienta",          precio:6000,  categoria:"MASCOTAS",       emoji:"", color:"#5aa9e6", foto:"", desc:"Envíanos la foto de tu mascota y la editamos." },
+  { nombre:"Ranita",            precio:6000,  categoria:"MASCOTAS",       emoji:"", color:"#3ddc97", foto:"", desc:"Verde, pequeña y muy simpática." },
+  { nombre:"Marco para fotos",  precio:10000, categoria:"FOTOS",          emoji:"", color:"#3ddc97", foto:"", desc:"Decora tus mejores momentos." },
+  { nombre:"Marco y fotos",     precio:15000, categoria:"FOTOS",          emoji:"", color:"#ff7eb6", foto:"", desc:"Hacemos que se vea como un photobooth." },
+  { nombre:"Pin personalizado", precio:10000, desde:true, categoria:"Personalizados", emoji:"", color:"#5aa9e6", foto:"", desc:"¿Buscas algo más? ¡Envíalo! Cotizamos por tamaño." }
+];
 
 /* ====== De aquí hacia abajo no necesitas cambiar nada ====== */
 const $ = id => document.getElementById(id);
@@ -250,7 +251,7 @@ function pintarProductos(){
         <div class="pin" style="background:${p.color}">${imagen(p)}</div>
         <h3>${p.nombre}</h3>
         <p class="desc">${p.desc}</p>
-        <div class="precio">${pesos(p.precio)}</div>
+        <div class="precio">${p.desde ? "Desde " : ""}${pesos(p.precio)}</div>
         <button class="btn" data-i="${i}">Agregar al pedido</button>
       </article>`).join("");
 }
@@ -294,7 +295,7 @@ $("enviar").addEventListener("click", () => {
   let total = 0;
   const lineas = lista.map(([i,c]) => {
     const p = PRODUCTOS[i]; total += p.precio*c;
-    return `• ${c} x ${p.nombre} — ${pesos(p.precio*c)}`;
+    return `• ${c} x ${p.nombre} — ${p.desde ? "desde " : ""}${pesos(p.precio*c)}`;
   });
   const msg = `¡Hola Garabatos! 🧲 Quiero hacer este pedido:\n\n${lineas.join("\n")}\n\nTotal: ${pesos(total)}\n\nMi nombre:\nCiudad / dirección:`;
   window.open(linkWA(msg), "_blank");
